@@ -1,0 +1,2 @@
+# Windows에서도 Prettier 기본값과 같은 LF 줄바꿈으로 저장
+* text=auto eol=lf

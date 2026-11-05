@@ -1,1 +1,1 @@
-# ui-ux-shadcn
+# registry-shadcn

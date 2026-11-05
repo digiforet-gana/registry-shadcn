@@ -1,0 +1,36 @@
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/PretendardVariable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  /* 스크롤 UI에 디자인을 적용하고 싶은 경우 사용 */
+  /* body {
+    -ms-overflow-style: auto;
+    scrollbar-width: auto;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background: lightgray;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: gray;
+  } */
+
+  /* 스크롤 UI를 제거하고 싶은 경우 사용 */
+  /* body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  } */
+}
