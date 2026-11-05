@@ -23,7 +23,7 @@ export default defineConfig([
 
   /* shadcn 컴포넌트는 variants 등을 함께 export하므로 Fast Refresh 규칙 제외 */
   {
-    files: ['src/components/ui/**/*.{ts,tsx}'],
+    files: ['src/components/ui/**/*.{ts,tsx}', 'src/registry/**/*.{ts,tsx}'],
     rules: { 'react-refresh/only-export-components': 'off' },
   },
 ]);
