@@ -1,12 +1,12 @@
 import babel from '@rolldown/plugin-babel';
 import tailwindcss from '@tailwindcss/vite';
 import react, { reactCompilerPreset } from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 
 // https://vite.dev/config/
-export default defineConfig(({ command }) => ({
-  /* GitHub Pages 프로젝트 사이트 경로(https://<user>.github.io/registry-shadcn/)에 맞춰 빌드 */
-  base: command === 'build' ? '/registry-shadcn/' : '/',
+export default defineConfig(({ mode }) => ({
+  /* 배포 경로 */
+  base: loadEnv(mode, process.cwd(), '').BASE_PATH || '/',
 
   plugins: [react(), babel({ presets: [reactCompilerPreset()] }), tailwindcss()],
 
