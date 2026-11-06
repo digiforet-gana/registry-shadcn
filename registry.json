@@ -34,6 +34,14 @@
       "description": "사용자가 선택과 해제를 전환할 수 있는 컨트롤입니다.",
       "dependencies": ["cn", "lucide-react", "radix-ui"],
       "files": [{ "path": "src/registry/checkbox/checkbox.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "폼 입력 필드 또는 입력 필드처럼 보이는 요소를 표시합니다.",
+      "dependencies": ["cn"],
+      "files": [{ "path": "src/registry/input/input.tsx", "type": "registry:ui" }]
     }
   ]
 }
