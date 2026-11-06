@@ -1,6 +1,6 @@
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import type { PlaygroundControls as Controls, PlaygroundValues } from '@/lib/playground';
 
@@ -30,18 +30,18 @@ export const PlaygroundControls = ({ controls, values, onChange }: PlaygroundCon
             <Label htmlFor={id}>{key}</Label>
 
             {control.type === 'select' ? (
-              <NativeSelect
-                id={id}
-                className="w-full"
-                value={values[key] as string}
-                onChange={(e) => onChange(key, e.target.value)}
-              >
-                {control.options.map((option) => (
-                  <NativeSelectOption key={option} value={option}>
-                    {option}
-                  </NativeSelectOption>
-                ))}
-              </NativeSelect>
+              <Select value={values[key] as string} onValueChange={(value) => onChange(key, value)}>
+                <SelectTrigger id={id} className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {control.options.map((option) => (
+                    <SelectItem key={option} value={option}>
+                      {option}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             ) : (
               <Input id={id} value={values[key] as string} onChange={(e) => onChange(key, e.target.value)} />
             )}
