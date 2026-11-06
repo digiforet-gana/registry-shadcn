@@ -36,6 +36,15 @@
       "files": [{ "path": "src/registry/checkbox/checkbox.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "기본 화면 위에 표시되어 사용자의 응답이나 확인을 받는 창입니다.",
+      "dependencies": ["cn", "lucide-react", "radix-ui"],
+      "registryDependencies": ["https://digiforet-gana.github.io/registry-shadcn/r/button.json"],
+      "files": [{ "path": "src/registry/dialog/dialog.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
