@@ -2,5 +2,14 @@
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "registry-shadcn",
   "homepage": "https://example.com",
-  "items": []
+  "items": [
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "버튼 또는 버튼처럼 보이는 요소를 표시합니다.",
+      "dependencies": ["class-variance-authority", "cn", "radix-ui"],
+      "files": [{ "path": "src/registry/button/button.tsx", "type": "registry:ui" }]
+    }
+  ]
 }

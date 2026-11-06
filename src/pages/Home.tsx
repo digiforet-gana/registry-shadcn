@@ -1,3 +1,6 @@
+import { Link } from 'react-router';
+import { registryItems } from '@/lib/registry';
+
 const HomePage = () => {
   return (
     <div className="flex flex-col gap-8">
@@ -8,9 +11,18 @@ const HomePage = () => {
 
       <section className="flex flex-col gap-4">
         <h2 className="text-xl font-semibold">Components</h2>
-        <p className="rounded-lg border border-dashed p-8 text-center text-sm text-muted-foreground">
-          컴포넌트 목록 영역
-        </p>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {registryItems.map((item) => (
+            <Link
+              key={item.name}
+              to={`/components/${item.name}`}
+              className="flex flex-col gap-1 rounded-lg border p-4 transition-colors hover:bg-accent"
+            >
+              <p className="font-medium">{item.title ?? item.name}</p>
+              {item.description && <p className="text-sm text-muted-foreground">{item.description}</p>}
+            </Link>
+          ))}
+        </div>
       </section>
     </div>
   );
