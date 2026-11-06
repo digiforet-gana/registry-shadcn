@@ -18,6 +18,14 @@
       "description": "버튼 또는 버튼처럼 보이는 요소를 표시합니다.",
       "dependencies": ["class-variance-authority", "cn", "radix-ui"],
       "files": [{ "path": "src/registry/button/button.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "헤더, 콘텐츠, 푸터로 구성된 카드를 표시합니다.",
+      "dependencies": ["cn"],
+      "files": [{ "path": "src/registry/card/card.tsx", "type": "registry:ui" }]
     }
   ]
 }
