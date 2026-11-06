@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "registry-shadcn",
-  "homepage": "https://example.com",
+  "homepage": "https://digiforet-gana.github.io/registry-shadcn",
   "items": [
     {
       "name": "button",
