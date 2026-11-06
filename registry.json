@@ -66,6 +66,14 @@
       "description": "사용자가 켜짐과 꺼짐을 전환할 수 있는 컨트롤입니다.",
       "dependencies": ["cn", "radix-ui"],
       "files": [{ "path": "src/registry/switch/switch.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "여러 줄 입력 필드 또는 입력 필드처럼 보이는 요소를 표시합니다.",
+      "dependencies": ["cn"],
+      "files": [{ "path": "src/registry/textarea/textarea.tsx", "type": "registry:ui" }]
     }
   ]
 }
