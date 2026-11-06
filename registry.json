@@ -52,6 +52,14 @@
       "files": [{ "path": "src/registry/label/label.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "버튼을 눌러 표시되는 팝업 패널에 풍부한 콘텐츠를 표시합니다.",
+      "dependencies": ["cn", "radix-ui"],
+      "files": [{ "path": "src/registry/popover/popover.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "select",
       "type": "registry:ui",
       "title": "Select",
