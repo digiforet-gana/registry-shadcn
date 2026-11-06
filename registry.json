@@ -50,6 +50,14 @@
       "description": "폼 요소와 연결된 접근 가능한 레이블을 표시합니다.",
       "dependencies": ["cn", "radix-ui"],
       "files": [{ "path": "src/registry/label/label.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "콘텐츠를 시각적 또는 의미적으로 구분합니다.",
+      "dependencies": ["cn", "radix-ui"],
+      "files": [{ "path": "src/registry/separator/separator.tsx", "type": "registry:ui" }]
     }
   ]
 }
