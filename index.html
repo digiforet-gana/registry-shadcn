@@ -5,6 +5,18 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Boilerplate - React Vite</title>
+
+    <!-- 첫 렌더링 전에 테마를 적용하여 새로고침 시 화면 깜빡임 방지 (저장된 값이 없으면 OS 설정 사용) -->
+    <script>
+      (() => {
+        let theme = null;
+        try {
+          theme = localStorage.getItem('theme');
+        } catch {}
+        const isDark = theme ? theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', isDark);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
