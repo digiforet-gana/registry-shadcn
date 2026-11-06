@@ -7,26 +7,35 @@
 }
 
 @layer base {
-  /* 다크 모드에서 스크롤바, 폼 기본 UI 등 브라우저 기본 요소도 어두운 색상으로 표시 */
+  /* 다크 모드인 경우, 브라우저 기본 요소도 어두운 색상으로 표시 */
   html.dark {
     color-scheme: dark;
   }
 
+  /* 스크롤 UI 유무에 상관없이 콘텐츠 폭이 항상 일정하도록 스크롤 UI 영역 확보 */
+  html {
+    scrollbar-gutter: stable;
+  }
+
+  body[data-scroll-locked] {
+    margin-right: 0 !important;
+  }
+
   /* 스크롤 UI에 디자인을 적용하고 싶은 경우 사용 */
-  /* body {
+  body {
     -ms-overflow-style: auto;
     scrollbar-width: auto;
   }
 
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 4px;
+    height: 4px;
     background: lightgray;
   }
 
   ::-webkit-scrollbar-thumb {
     background: gray;
-  } */
+  }
 
   /* 스크롤 UI를 제거하고 싶은 경우 사용 */
   /* body {

@@ -34,7 +34,7 @@ export const PlaygroundControls = ({ controls, values, onChange }: PlaygroundCon
                 <SelectTrigger id={id} className="w-full">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent position="popper">
                   {control.options.map((option) => (
                     <SelectItem key={option} value={option}>
                       {option}

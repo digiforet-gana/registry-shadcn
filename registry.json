@@ -52,6 +52,14 @@
       "files": [{ "path": "src/registry/label/label.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "버튼을 눌러 표시되는 옵션 목록에서 값을 선택합니다.",
+      "dependencies": ["cn", "lucide-react", "radix-ui"],
+      "files": [{ "path": "src/registry/select/select.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "separator",
       "type": "registry:ui",
       "title": "Separator",
