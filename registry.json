@@ -82,6 +82,14 @@
       "description": "여러 줄 입력 필드 또는 입력 필드처럼 보이는 요소를 표시합니다.",
       "dependencies": ["cn"],
       "files": [{ "path": "src/registry/textarea/textarea.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "요소에 마우스를 올리거나 포커스하면 관련 정보를 팝업으로 표시합니다.",
+      "dependencies": ["cn", "radix-ui"],
+      "files": [{ "path": "src/registry/tooltip/tooltip.tsx", "type": "registry:ui" }]
     }
   ]
 }
