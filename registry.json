@@ -58,6 +58,14 @@
       "description": "콘텐츠를 시각적 또는 의미적으로 구분합니다.",
       "dependencies": ["cn", "radix-ui"],
       "files": [{ "path": "src/registry/separator/separator.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "사용자가 켜짐과 꺼짐을 전환할 수 있는 컨트롤입니다.",
+      "dependencies": ["cn", "radix-ui"],
+      "files": [{ "path": "src/registry/switch/switch.tsx", "type": "registry:ui" }]
     }
   ]
 }
