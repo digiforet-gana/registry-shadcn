@@ -1,5 +1,5 @@
-import { Label } from '@/components/ui/label';
 import { definePlayground } from '@/lib/playground';
+import { Label } from '../label/label';
 import { Checkbox } from './checkbox';
 
 /* 사이트 플레이그라운드 전용 파일 (registry.json에 등록하지 않으므로 배포되지 않음) */
