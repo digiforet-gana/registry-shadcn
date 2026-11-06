@@ -4,6 +4,14 @@
   "homepage": "https://digiforet-gana.github.io/registry-shadcn",
   "items": [
     {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "배지 또는 배지처럼 보이는 요소를 표시합니다.",
+      "dependencies": ["class-variance-authority", "cn", "radix-ui"],
+      "files": [{ "path": "src/registry/badge/badge.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
