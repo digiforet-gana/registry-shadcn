@@ -26,6 +26,14 @@
       "description": "헤더, 콘텐츠, 푸터로 구성된 카드를 표시합니다.",
       "dependencies": ["cn"],
       "files": [{ "path": "src/registry/card/card.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "사용자가 선택과 해제를 전환할 수 있는 컨트롤입니다.",
+      "dependencies": ["cn", "lucide-react", "radix-ui"],
+      "files": [{ "path": "src/registry/checkbox/checkbox.tsx", "type": "registry:ui" }]
     }
   ]
 }
