@@ -191,6 +191,14 @@
       "files": [{ "path": "src/registry/textarea/textarea.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "Toggle",
+      "description": "켜짐과 꺼짐 두 가지 상태를 가지는 버튼입니다.",
+      "dependencies": ["class-variance-authority", "cn", "radix-ui"],
+      "files": [{ "path": "src/registry/toggle/toggle.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "tooltip",
       "type": "registry:ui",
       "title": "Tooltip",
