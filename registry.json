@@ -94,6 +94,19 @@
       "files": [{ "path": "src/registry/input/input.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "Input Group",
+      "description": "입력 필드 앞뒤에 아이콘, 텍스트, 버튼 등을 붙여 하나의 입력 묶음으로 표시합니다.",
+      "dependencies": ["class-variance-authority", "cn"],
+      "registryDependencies": [
+        "https://digiforet-gana.github.io/registry-shadcn/r/button.json",
+        "https://digiforet-gana.github.io/registry-shadcn/r/input.json",
+        "https://digiforet-gana.github.io/registry-shadcn/r/textarea.json"
+      ],
+      "files": [{ "path": "src/registry/input-group/input-group.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "label",
       "type": "registry:ui",
       "title": "Label",
