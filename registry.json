@@ -126,6 +126,14 @@
       "files": [{ "path": "src/registry/radio-group/radio-group.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "title": "Scroll Area",
+      "description": "브라우저 기본 스크롤을 유지하면서 스크롤바를 직접 디자인한 스크롤 영역입니다.",
+      "dependencies": ["cn", "radix-ui"],
+      "files": [{ "path": "src/registry/scroll-area/scroll-area.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "select",
       "type": "registry:ui",
       "title": "Select",
