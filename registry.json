@@ -69,6 +69,18 @@
       "files": [{ "path": "src/registry/checkbox/checkbox.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "검색어를 입력해 명령이나 항목을 빠르게 찾아 실행하는 메뉴입니다.",
+      "dependencies": ["cmdk", "cn", "lucide-react"],
+      "registryDependencies": [
+        "https://digiforet-gana.github.io/registry-shadcn/r/dialog.json",
+        "https://digiforet-gana.github.io/registry-shadcn/r/input-group.json"
+      ],
+      "files": [{ "path": "src/registry/command/command.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "dialog",
       "type": "registry:ui",
       "title": "Dialog",
