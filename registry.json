@@ -102,6 +102,15 @@
       "files": [{ "path": "src/registry/separator/separator.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "sheet",
+      "type": "registry:ui",
+      "title": "Sheet",
+      "description": "화면 가장자리에서 밀려 나와 기본 화면을 보완하는 콘텐츠를 표시합니다.",
+      "dependencies": ["cn", "lucide-react", "radix-ui"],
+      "registryDependencies": ["https://digiforet-gana.github.io/registry-shadcn/r/button.json"],
+      "files": [{ "path": "src/registry/sheet/sheet.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "switch",
       "type": "registry:ui",
       "title": "Switch",
