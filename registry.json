@@ -69,6 +69,18 @@
       "files": [{ "path": "src/registry/checkbox/checkbox.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "검색어를 입력해 목록을 걸러 가며 하나 또는 여러 값을 선택하는 입력 필드입니다.",
+      "dependencies": ["@base-ui/react", "cn", "lucide-react"],
+      "registryDependencies": [
+        "https://digiforet-gana.github.io/registry-shadcn/r/button.json",
+        "https://digiforet-gana.github.io/registry-shadcn/r/input-group.json"
+      ],
+      "files": [{ "path": "src/registry/combobox/combobox.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "command",
       "type": "registry:ui",
       "title": "Command",
