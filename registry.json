@@ -175,6 +175,14 @@
       "files": [{ "path": "src/registry/switch/switch.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "행과 열로 구성된 반응형 표를 표시합니다.",
+      "dependencies": ["cn"],
+      "files": [{ "path": "src/registry/table/table.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "tabs",
       "type": "registry:ui",
       "title": "Tabs",
