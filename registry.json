@@ -151,6 +151,14 @@
       "files": [{ "path": "src/registry/skeleton/skeleton.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "로딩 상태를 나타내는 회전 아이콘입니다.",
+      "dependencies": ["cn", "lucide-react"],
+      "files": [{ "path": "src/registry/spinner/spinner.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "switch",
       "type": "registry:ui",
       "title": "Switch",
