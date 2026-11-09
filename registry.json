@@ -110,6 +110,14 @@
       "files": [{ "path": "src/registry/popover/popover.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "작업의 진행률을 막대 형태로 표시합니다.",
+      "dependencies": ["cn", "radix-ui"],
+      "files": [{ "path": "src/registry/progress/progress.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "radio-group",
       "type": "registry:ui",
       "title": "Radio Group",
