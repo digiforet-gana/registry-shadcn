@@ -143,6 +143,14 @@
       "files": [{ "path": "src/registry/sheet/sheet.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "콘텐츠를 불러오는 동안 자리를 표시하는 로딩 플레이스홀더입니다.",
+      "dependencies": ["cn"],
+      "files": [{ "path": "src/registry/skeleton/skeleton.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "switch",
       "type": "registry:ui",
       "title": "Switch",
