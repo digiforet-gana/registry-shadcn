@@ -4,6 +4,15 @@
   "homepage": "https://digiforet-gana.github.io/registry-shadcn",
   "items": [
     {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog",
+      "description": "중요한 동작 전에 사용자의 확인을 받는 창으로, 응답하기 전까지 닫히지 않습니다.",
+      "dependencies": ["cn", "radix-ui"],
+      "registryDependencies": ["https://digiforet-gana.github.io/registry-shadcn/r/button.json"],
+      "files": [{ "path": "src/registry/alert-dialog/alert-dialog.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "badge",
       "type": "registry:ui",
       "title": "Badge",
