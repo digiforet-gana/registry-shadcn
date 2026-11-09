@@ -29,6 +29,14 @@
       "files": [{ "path": "src/registry/alert-dialog/alert-dialog.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "사용자를 나타내는 이미지를 표시하며, 이미지가 없으면 대체 텍스트를 표시합니다.",
+      "dependencies": ["cn", "radix-ui"],
+      "files": [{ "path": "src/registry/avatar/avatar.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "badge",
       "type": "registry:ui",
       "title": "Badge",
