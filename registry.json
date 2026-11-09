@@ -4,6 +4,14 @@
   "homepage": "https://digiforet-gana.github.io/registry-shadcn",
   "items": [
     {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "사용자의 주의가 필요한 안내 메시지를 표시합니다.",
+      "dependencies": ["class-variance-authority", "cn"],
+      "files": [{ "path": "src/registry/alert/alert.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "alert-dialog",
       "type": "registry:ui",
       "title": "Alert Dialog",
