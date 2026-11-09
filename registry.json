@@ -101,6 +101,14 @@
       "files": [{ "path": "src/registry/switch/switch.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "여러 콘텐츠 영역을 탭으로 나누어 한 번에 하나씩 표시합니다.",
+      "dependencies": ["class-variance-authority", "cn", "radix-ui"],
+      "files": [{ "path": "src/registry/tabs/tabs.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "textarea",
       "type": "registry:ui",
       "title": "Textarea",
