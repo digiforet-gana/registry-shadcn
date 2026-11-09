@@ -4,6 +4,14 @@
   "homepage": "https://digiforet-gana.github.io/registry-shadcn",
   "items": [
     {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "제목을 눌러 각 콘텐츠 영역을 펼치거나 접을 수 있는 세로 목록입니다.",
+      "dependencies": ["cn", "lucide-react", "radix-ui"],
+      "files": [{ "path": "src/registry/accordion/accordion.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "alert",
       "type": "registry:ui",
       "title": "Alert",
