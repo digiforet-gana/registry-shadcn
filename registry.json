@@ -167,6 +167,14 @@
       "files": [{ "path": "src/registry/skeleton/skeleton.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "sonner",
+      "type": "registry:ui",
+      "title": "Sonner",
+      "description": "화면 구석에 잠시 나타났다 사라지는 토스트 알림을 표시합니다.",
+      "dependencies": ["lucide-react", "next-themes", "sonner"],
+      "files": [{ "path": "src/registry/sonner/sonner.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "spinner",
       "type": "registry:ui",
       "title": "Spinner",
