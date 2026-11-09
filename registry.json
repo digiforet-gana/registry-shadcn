@@ -45,6 +45,14 @@
       "files": [{ "path": "src/registry/dialog/dialog.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "버튼을 눌러 표시되는 동작 또는 기능 목록 메뉴입니다.",
+      "dependencies": ["cn", "lucide-react", "radix-ui"],
+      "files": [{ "path": "src/registry/dropdown-menu/dropdown-menu.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
