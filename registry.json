@@ -254,6 +254,14 @@
       "files": [{ "path": "src/registry/menubar/menubar.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "native-select",
+      "type": "registry:ui",
+      "title": "Native Select",
+      "description": "브라우저 기본 select 요소에 스타일을 입힌 선택 상자입니다.",
+      "dependencies": ["cn", "lucide-react"],
+      "files": [{ "path": "src/registry/native-select/native-select.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "navigation-menu",
       "type": "registry:ui",
       "title": "Navigation Menu",
