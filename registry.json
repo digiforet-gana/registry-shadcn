@@ -104,6 +104,14 @@
       "files": [{ "path": "src/registry/carousel/carousel.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "chart",
+      "type": "registry:ui",
+      "title": "Chart",
+      "description": "Recharts 기반의 막대, 선, 영역 등 데이터 차트를 테마 색상에 맞춰 표시합니다.",
+      "dependencies": ["cn", "recharts"],
+      "files": [{ "path": "src/registry/chart/chart.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "checkbox",
       "type": "registry:ui",
       "title": "Checkbox",
