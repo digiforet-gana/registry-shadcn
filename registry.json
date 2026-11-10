@@ -144,6 +144,14 @@
       "files": [{ "path": "src/registry/dialog/dialog.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "화면 가장자리에서 끌어올리거나 내려 닫을 수 있는 서랍형 패널입니다.",
+      "dependencies": ["cn", "vaul"],
+      "files": [{ "path": "src/registry/drawer/drawer.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "dropdown-menu",
       "type": "registry:ui",
       "title": "Dropdown Menu",
