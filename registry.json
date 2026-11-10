@@ -148,6 +148,15 @@
       "files": [{ "path": "src/registry/label/label.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "여러 페이지로 나뉜 콘텐츠의 페이지 이동 링크를 표시합니다.",
+      "dependencies": ["cn", "lucide-react"],
+      "registryDependencies": ["https://digiforet-gana.github.io/registry-shadcn/r/button.json"],
+      "files": [{ "path": "src/registry/pagination/pagination.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "popover",
       "type": "registry:ui",
       "title": "Popover",
