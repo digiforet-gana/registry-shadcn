@@ -45,6 +45,14 @@
       "files": [{ "path": "src/registry/badge/badge.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "현재 페이지까지의 경로를 계층 링크로 표시합니다.",
+      "dependencies": ["cn", "lucide-react", "radix-ui"],
+      "files": [{ "path": "src/registry/breadcrumb/breadcrumb.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
