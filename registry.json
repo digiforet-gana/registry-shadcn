@@ -246,6 +246,14 @@
       "files": [{ "path": "src/registry/label/label.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "navigation-menu",
+      "type": "registry:ui",
+      "title": "Navigation Menu",
+      "description": "사이트 상단 메뉴처럼 링크와 하위 메뉴 패널로 구성된 탐색 메뉴입니다.",
+      "dependencies": ["class-variance-authority", "cn", "lucide-react", "radix-ui"],
+      "files": [{ "path": "src/registry/navigation-menu/navigation-menu.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pagination",
       "type": "registry:ui",
       "title": "Pagination",
