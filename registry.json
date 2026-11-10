@@ -127,6 +127,14 @@
       "files": [{ "path": "src/registry/command/command.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "Context Menu",
+      "description": "마우스 오른쪽 버튼을 누르거나 길게 눌러 표시되는 동작 메뉴입니다.",
+      "dependencies": ["cn", "lucide-react", "radix-ui"],
+      "files": [{ "path": "src/registry/context-menu/context-menu.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "dialog",
       "type": "registry:ui",
       "title": "Dialog",
