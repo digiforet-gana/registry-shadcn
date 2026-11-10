@@ -95,6 +95,15 @@
       "files": [{ "path": "src/registry/card/card.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "Carousel",
+      "description": "여러 슬라이드를 좌우 또는 위아래로 넘겨 보는 캐러셀입니다.",
+      "dependencies": ["cn", "embla-carousel-react", "lucide-react"],
+      "registryDependencies": ["https://digiforet-gana.github.io/registry-shadcn/r/button.json"],
+      "files": [{ "path": "src/registry/carousel/carousel.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "checkbox",
       "type": "registry:ui",
       "title": "Checkbox",
