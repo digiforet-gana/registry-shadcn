@@ -311,6 +311,14 @@
       "files": [{ "path": "src/registry/radio-group/radio-group.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "resizable",
+      "type": "registry:ui",
+      "title": "Resizable",
+      "description": "경계선을 끌어 크기를 조절할 수 있는 패널 묶음입니다.",
+      "dependencies": ["cn", "react-resizable-panels"],
+      "files": [{ "path": "src/registry/resizable/resizable.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "scroll-area",
       "type": "registry:ui",
       "title": "Scroll Area",
