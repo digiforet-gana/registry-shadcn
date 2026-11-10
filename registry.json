@@ -221,6 +221,15 @@
       "files": [{ "path": "src/registry/input-otp/input-otp.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "item",
+      "type": "registry:ui",
+      "title": "Item",
+      "description": "아이콘, 제목, 설명, 동작 버튼으로 구성된 목록 항목을 표시합니다.",
+      "dependencies": ["class-variance-authority", "cn", "radix-ui"],
+      "registryDependencies": ["https://digiforet-gana.github.io/registry-shadcn/r/separator.json"],
+      "files": [{ "path": "src/registry/item/item.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "kbd",
       "type": "registry:ui",
       "title": "Kbd",
