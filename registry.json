@@ -147,6 +147,14 @@
       "files": [{ "path": "src/registry/field/field.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "링크에 마우스를 올리면 관련 내용을 미리 보여 주는 카드를 표시합니다.",
+      "dependencies": ["cn", "radix-ui"],
+      "files": [{ "path": "src/registry/hover-card/hover-card.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
