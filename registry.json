@@ -61,6 +61,15 @@
       "files": [{ "path": "src/registry/button/button.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "button-group",
+      "type": "registry:ui",
+      "title": "Button Group",
+      "description": "관련된 버튼들을 하나의 묶음으로 붙여서 표시합니다.",
+      "dependencies": ["class-variance-authority", "cn", "radix-ui"],
+      "registryDependencies": ["https://digiforet-gana.github.io/registry-shadcn/r/separator.json"],
+      "files": [{ "path": "src/registry/button-group/button-group.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "calendar",
       "type": "registry:ui",
       "title": "Calendar",
