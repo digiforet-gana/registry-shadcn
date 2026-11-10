@@ -188,6 +188,14 @@
       "files": [{ "path": "src/registry/input-otp/input-otp.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "키보드 키나 단축키를 키 모양으로 표시합니다.",
+      "dependencies": ["cn"],
+      "files": [{ "path": "src/registry/kbd/kbd.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "label",
       "type": "registry:ui",
       "title": "Label",
