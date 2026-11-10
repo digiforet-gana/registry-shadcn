@@ -160,6 +160,14 @@
       "files": [{ "path": "src/registry/dropdown-menu/dropdown-menu.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "empty",
+      "type": "registry:ui",
+      "title": "Empty",
+      "description": "표시할 데이터가 없을 때 안내 문구와 다음 동작을 보여 주는 빈 화면입니다.",
+      "dependencies": ["class-variance-authority", "cn"],
+      "files": [{ "path": "src/registry/empty/empty.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "field",
       "type": "registry:ui",
       "title": "Field",
