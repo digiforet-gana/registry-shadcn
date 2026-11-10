@@ -29,6 +29,14 @@
       "files": [{ "path": "src/registry/alert-dialog/alert-dialog.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "aspect-ratio",
+      "type": "registry:ui",
+      "title": "Aspect Ratio",
+      "description": "이미지나 영상 등의 콘텐츠를 정해진 가로세로 비율로 표시합니다.",
+      "dependencies": ["radix-ui"],
+      "files": [{ "path": "src/registry/aspect-ratio/aspect-ratio.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",
