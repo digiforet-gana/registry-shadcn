@@ -234,6 +234,14 @@
       "files": [{ "path": "src/registry/skeleton/skeleton.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "손잡이를 끌어 범위 안에서 값을 선택하는 입력 요소입니다.",
+      "dependencies": ["cn", "radix-ui"],
+      "files": [{ "path": "src/registry/slider/slider.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "sonner",
       "type": "registry:ui",
       "title": "Sonner",
