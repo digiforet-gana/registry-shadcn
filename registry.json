@@ -119,6 +119,18 @@
       "files": [{ "path": "src/registry/dropdown-menu/dropdown-menu.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "폼 입력 요소를 레이블, 설명, 오류 메시지와 함께 묶어 배치합니다.",
+      "dependencies": ["class-variance-authority", "cn"],
+      "registryDependencies": [
+        "https://digiforet-gana.github.io/registry-shadcn/r/label.json",
+        "https://digiforet-gana.github.io/registry-shadcn/r/separator.json"
+      ],
+      "files": [{ "path": "src/registry/field/field.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "input",
       "type": "registry:ui",
       "title": "Input",

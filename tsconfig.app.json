@@ -32,6 +32,7 @@
        */
       "@/components/ui/dialog": ["./src/registry/dialog/dialog.tsx"],
       "@/components/ui/input-group": ["./src/registry/input-group/input-group.tsx"],
+      "@/components/ui/separator": ["./src/registry/separator/separator.tsx"],
       "@/components/ui/textarea": ["./src/registry/textarea/textarea.tsx"],
       "@/components/ui/toggle": ["./src/registry/toggle/toggle.tsx"]
     }
