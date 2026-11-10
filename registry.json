@@ -53,6 +53,15 @@
       "files": [{ "path": "src/registry/button/button.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "날짜를 확인하고 선택할 수 있는 달력입니다.",
+      "dependencies": ["cn", "lucide-react", "react-day-picker"],
+      "registryDependencies": ["https://digiforet-gana.github.io/registry-shadcn/r/button.json"],
+      "files": [{ "path": "src/registry/calendar/calendar.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
