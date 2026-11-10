@@ -369,6 +369,25 @@
       "files": [{ "path": "src/registry/sheet/sheet.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "title": "Sidebar",
+      "description": "접고 펼 수 있는 앱 사이드바와 메뉴 구성 요소들입니다.",
+      "dependencies": ["class-variance-authority", "cn", "lucide-react", "radix-ui"],
+      "registryDependencies": [
+        "https://digiforet-gana.github.io/registry-shadcn/r/button.json",
+        "https://digiforet-gana.github.io/registry-shadcn/r/input.json",
+        "https://digiforet-gana.github.io/registry-shadcn/r/separator.json",
+        "https://digiforet-gana.github.io/registry-shadcn/r/sheet.json",
+        "https://digiforet-gana.github.io/registry-shadcn/r/skeleton.json",
+        "https://digiforet-gana.github.io/registry-shadcn/r/tooltip.json"
+      ],
+      "files": [
+        { "path": "src/registry/sidebar/sidebar.tsx", "type": "registry:ui" },
+        { "path": "src/hooks/use-mobile.ts", "type": "registry:hook" }
+      ]
+    },
+    {
       "name": "skeleton",
       "type": "registry:ui",
       "title": "Skeleton",

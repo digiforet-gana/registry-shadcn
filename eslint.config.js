@@ -29,7 +29,7 @@ export default defineConfig([
 
   /* shadcn 공식 코드는 수정하지 않으므로, effect 내 setState 규칙 제외 (Carousel 등, 직접 작성하는 demo 파일은 규칙 유지) */
   {
-    files: ['src/components/ui/**/*.{ts,tsx}', 'src/registry/**/*.{ts,tsx}'],
+    files: ['src/components/ui/**/*.{ts,tsx}', 'src/registry/**/*.{ts,tsx}', 'src/hooks/use-mobile.ts'],
     ignores: ['src/registry/**/*.demo.tsx'],
     rules: { 'react-hooks/set-state-in-effect': 'off' },
   },
