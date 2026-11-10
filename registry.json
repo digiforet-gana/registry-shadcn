@@ -246,6 +246,14 @@
       "files": [{ "path": "src/registry/label/label.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "menubar",
+      "type": "registry:ui",
+      "title": "Menubar",
+      "description": "데스크톱 앱 상단처럼 여러 메뉴를 가로로 나열한 메뉴바입니다.",
+      "dependencies": ["cn", "lucide-react", "radix-ui"],
+      "files": [{ "path": "src/registry/menubar/menubar.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "navigation-menu",
       "type": "registry:ui",
       "title": "Navigation Menu",
