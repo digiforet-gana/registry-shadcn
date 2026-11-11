@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { useParams } from 'react-router';
 import { PlaygroundControls } from '@/components/playground/PlaygroundControls';
-import { getPlayground } from '@/lib/demos';
+import { loadPlayground } from '@/lib/demos';
 import { type Playground, getDefaultValues, getUsageCode } from '@/lib/playground';
 import { type RegistryItem, getInstallCommand, getRegistryItem } from '@/lib/registry';
 import NotFoundPage from './NotFound';
@@ -14,10 +14,17 @@ const ComponentPage = () => {
   if (!item) return <NotFoundPage />;
 
   /* 다른 컴포넌트로 이동 시 Props 상태가 초기화되도록 key 지정 */
-  return <ComponentDetail key={item.name} item={item} playground={getPlayground(item.name)} />;
+  return <ComponentDetail key={item.name} item={item} />;
 };
 
-const ComponentDetail = ({ item, playground }: { item: RegistryItem; playground?: Playground }) => {
+const ComponentDetail = ({ item }: { item: RegistryItem }) => {
+  /* 데모 청크를 불러오는 동안 상위 Suspense로 대기 */
+  const playground = use(loadPlayground(item.name));
+
+  return <ComponentContent item={item} playground={playground} />;
+};
+
+const ComponentContent = ({ item, playground }: { item: RegistryItem; playground?: Playground }) => {
   const [values, setValues] = useState(() => (playground ? getDefaultValues(playground.controls) : {}));
 
   const handleChangeValue = (key: string, value: string | boolean) => {
