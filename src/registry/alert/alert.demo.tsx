@@ -27,7 +27,7 @@ export default definePlayground({
         <AlertDescription>{description}</AlertDescription>
         {action && (
           <AlertAction>
-            <Button variant="ghost" size="icon-sm" aria-label="More">
+            <Button variant="ghost" size="icon-sm" aria-label="More" onClick={() => {}}>
               <EllipsisVerticalIcon />
             </Button>
           </AlertAction>
@@ -54,7 +54,7 @@ export default definePlayground({
       ...(action
         ? [
             '  <AlertAction>',
-            '    <Button variant="ghost" size="icon-sm" aria-label="More">',
+            '    <Button variant="ghost" size="icon-sm" aria-label="More" onClick={() => {}}>',
             '      <EllipsisVerticalIcon />',
             '    </Button>',
             '  </AlertAction>',

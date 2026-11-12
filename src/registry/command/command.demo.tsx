@@ -54,7 +54,7 @@ const CommandContent = ({ placeholder, shortcut }: { placeholder: string; shortc
           {index > 0 && <CommandSeparator />}
           <CommandGroup heading={group.heading}>
             {group.items.map(({ label, icon: Icon, disabled, shortcut: keys }) => (
-              <CommandItem key={label} disabled={disabled}>
+              <CommandItem key={label} disabled={disabled} onSelect={() => {}}>
                 <Icon />
                 <span>{label}</span>
                 {shortcut && keys && <CommandShortcut>{keys}</CommandShortcut>}
@@ -68,7 +68,15 @@ const CommandContent = ({ placeholder, shortcut }: { placeholder: string; shortc
 );
 
 /* dialog 모드에서 열림 상태를 관리하기 위한 미리보기 컴포넌트 */
-const CommandDialogPreview = ({ placeholder, shortcut }: { placeholder: string; shortcut: boolean }) => {
+const CommandDialogPreview = ({
+  placeholder,
+  shortcut,
+  showCloseButton,
+}: {
+  placeholder: string;
+  shortcut: boolean;
+  showCloseButton: boolean;
+}) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -76,7 +84,7 @@ const CommandDialogPreview = ({ placeholder, shortcut }: { placeholder: string; 
       <Button variant="outline" onClick={() => setOpen(true)}>
         Open Command
       </Button>
-      <CommandDialog open={open} onOpenChange={setOpen}>
+      <CommandDialog open={open} onOpenChange={setOpen} showCloseButton={showCloseButton}>
         <Command>
           <CommandContent placeholder={placeholder} shortcut={shortcut} />
         </Command>
@@ -95,18 +103,20 @@ export default definePlayground({
     placeholder: { type: 'text', defaultValue: 'Type a command or search...' },
     /* 항목 우측 단축키 표시 (CommandShortcut) */
     shortcut: { type: 'boolean', defaultValue: true },
+    /* CommandDialog 우측 상단 X 버튼 (dialog 모드일 때만 적용, 기본값 false) */
+    showCloseButton: { type: 'boolean', defaultValue: false },
   },
 
-  render: ({ mode, placeholder, shortcut }) =>
+  render: ({ mode, placeholder, shortcut, showCloseButton }) =>
     mode === 'dialog' ? (
-      <CommandDialogPreview placeholder={placeholder} shortcut={shortcut} />
+      <CommandDialogPreview placeholder={placeholder} shortcut={shortcut} showCloseButton={showCloseButton} />
     ) : (
       <Command className="max-w-sm rounded-lg border">
         <CommandContent placeholder={placeholder} shortcut={shortcut} />
       </Command>
     ),
 
-  code: ({ mode, placeholder, shortcut }) => {
+  code: ({ mode, placeholder, shortcut }, formatProps) => {
     const isDialog = mode === 'dialog';
     const indent = isDialog ? '    ' : '';
     const icons = GROUPS.flatMap((group) => group.items.map((item) => item.iconName)).sort();
@@ -125,7 +135,7 @@ export default definePlayground({
       ...(index > 0 ? ['    <CommandSeparator />'] : []),
       `    <CommandGroup heading="${group.heading}">`,
       ...group.items.flatMap((item) => [
-        `      <CommandItem${item.disabled ? ' disabled' : ''}>`,
+        `      <CommandItem${item.disabled ? ' disabled' : ''} onSelect={() => {}}>`,
         `        <${item.iconName} />`,
         `        <span>${item.label}</span>`,
         ...(shortcut && item.shortcut ? [`        <CommandShortcut>${item.shortcut}</CommandShortcut>`] : []),
@@ -159,7 +169,7 @@ export default definePlayground({
             '  <Button variant="outline" onClick={() => setOpen(true)}>',
             '    Open Command',
             '  </Button>',
-            '  <CommandDialog open={open} onOpenChange={setOpen}>',
+            `  <CommandDialog open={open} onOpenChange={setOpen}${formatProps(['showCloseButton'])}>`,
             ...command,
             '  </CommandDialog>',
             '</>',

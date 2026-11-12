@@ -50,7 +50,7 @@ export default definePlayground({
           ))}
         </div>
         <SheetFooter>
-          <Button>Save Changes</Button>
+          <Button onClick={() => {}}>Save Changes</Button>
           <SheetClose asChild>
             <Button variant="outline">Close</Button>
           </SheetClose>
@@ -96,7 +96,7 @@ export default definePlayground({
       ...fields,
       '    </div>',
       '    <SheetFooter>',
-      '      <Button>Save Changes</Button>',
+      '      <Button onClick={() => {}}>Save Changes</Button>',
       '      <SheetClose asChild>',
       '        <Button variant="outline">Close</Button>',
       '      </SheetClose>',

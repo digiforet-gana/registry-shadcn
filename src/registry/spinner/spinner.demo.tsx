@@ -8,20 +8,16 @@ export default definePlayground({
   component: 'Spinner',
   importPath: '@/components/ui/spinner',
   controls: {
-    /* Spinner 자체에는 size prop이 없으므로 className으로 크기 지정 (기본 size-4) */
-    size: { type: 'select', options: ['size-3', 'size-4', 'size-6', 'size-8'], defaultValue: 'size-4' },
     /* 단독 / 버튼 안 / 배지 안 */
     example: { type: 'select', options: ['standalone', 'button', 'badge'], defaultValue: 'standalone' },
     text: { type: 'text', defaultValue: 'Loading...' },
   },
 
-  render: ({ size, example, text }) => {
-    const className = size === 'size-4' ? undefined : size;
-
+  render: ({ example, text }) => {
     if (example === 'button') {
       return (
         <Button disabled size="sm">
-          <Spinner data-icon="inline-start" className={className} />
+          <Spinner data-icon="inline-start" />
           {text}
         </Button>
       );
@@ -29,16 +25,15 @@ export default definePlayground({
     if (example === 'badge') {
       return (
         <Badge>
-          <Spinner data-icon="inline-start" className={className} />
+          <Spinner data-icon="inline-start" />
           {text}
         </Badge>
       );
     }
-    return <Spinner className={className} />;
+    return <Spinner />;
   },
 
-  code: ({ size, example, text }) => {
-    const classAttr = size === 'size-4' ? '' : ` className="${size}"`;
+  code: ({ example, text }) => {
     const imports = [
       ...(example === 'badge' ? [`import { Badge } from '@/components/ui/badge';`] : []),
       ...(example === 'button' ? [`import { Button } from '@/components/ui/button';`] : []),
@@ -52,8 +47,8 @@ export default definePlayground({
     }[example];
 
     const element = parent
-      ? [parent.open, `  <Spinner data-icon="inline-start"${classAttr} />`, `  ${text}`, parent.close]
-      : [`<Spinner${classAttr} />`];
+      ? [parent.open, '  <Spinner data-icon="inline-start" />', `  ${text}`, parent.close]
+      : ['<Spinner />'];
 
     return [...imports, '', ...element].join('\n');
   },

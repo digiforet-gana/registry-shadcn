@@ -13,18 +13,22 @@ const SonnerPreview = ({
   position,
   description,
   action,
+  closeButton,
+  richColors,
 }: {
   type: 'default' | 'success' | 'info' | 'warning' | 'error' | 'loading';
   position: ToasterProps['position'];
   description: boolean;
   action: boolean;
+  closeButton: boolean;
+  richColors: boolean;
 }) => {
   const showToast = () => {
     const options = {
       ...(description && { description: DESCRIPTION }),
       ...(action && {
         action: (
-          <Button variant="ghost" size="icon-sm" aria-label="More" className="ml-auto">
+          <Button variant="ghost" size="icon-sm" aria-label="More" className="ml-auto" onClick={() => {}}>
             <EllipsisVerticalIcon />
           </Button>
         ),
@@ -39,7 +43,7 @@ const SonnerPreview = ({
       <Button variant="outline" onClick={showToast}>
         Show Toast
       </Button>
-      <Toaster position={position} />
+      <Toaster position={position} closeButton={closeButton} richColors={richColors} />
     </>
   );
 };
@@ -65,11 +69,13 @@ export default definePlayground({
     description: { type: 'boolean', defaultValue: true },
     /* 우측 동작 버튼 (action에는 { label, onClick } 대신 React 요소도 전달 가능) */
     action: { type: 'boolean', defaultValue: true },
+    /* 토스트 좌측 상단에 닫기 버튼 표시 (Toaster prop) */
+    closeButton: { type: 'boolean', defaultValue: false },
+    /* success, info, warning, error 토스트를 종류별 배경색으로 강조 (Toaster prop) */
+    richColors: { type: 'boolean', defaultValue: false },
   },
 
-  render: ({ type, position, description, action }) => (
-    <SonnerPreview type={type} position={position} description={description} action={action} />
-  ),
+  render: (props) => <SonnerPreview {...props} />,
 
   code: ({ type, description, action }, formatProps) => {
     const call = type === 'default' ? 'toast' : `toast.${type}`;
@@ -78,7 +84,7 @@ export default definePlayground({
       ...(action
         ? [
             '        action: (',
-            '          <Button variant="ghost" size="icon-sm" aria-label="More" className="ml-auto">',
+            '          <Button variant="ghost" size="icon-sm" aria-label="More" className="ml-auto" onClick={() => {}}>',
             '            <EllipsisVerticalIcon />',
             '          </Button>',
             '        ),',
@@ -95,7 +101,7 @@ export default definePlayground({
       `import { Toaster } from '@/components/ui/sonner';`,
       '',
       '{/* 앱 최상단(레이아웃)에 한 번만 배치 */}',
-      `<Toaster${formatProps(['position'])} />`,
+      `<Toaster${formatProps(['position', 'closeButton', 'richColors'])} />`,
       '',
       '{/* 토스트를 띄우고 싶은 곳에서 toast() 호출 */}',
       '<Button',

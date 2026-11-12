@@ -8,8 +8,10 @@ export default definePlayground({
   component: 'Empty',
   importPath: '@/components/ui/empty',
   controls: {
-    /* 위쪽 아이콘 (EmptyMedia, icon: 배경이 있는 아이콘 / default: 아이콘만) */
-    media: { type: 'select', options: ['icon', 'default', 'none'], defaultValue: 'icon' },
+    /* 위쪽 아이콘 영역 (EmptyMedia) */
+    media: { type: 'boolean', defaultValue: true },
+    /* EmptyMedia의 variant (default: 아이콘만, icon: 배경이 있는 아이콘) */
+    mediaVariant: { type: 'select', options: ['default', 'icon'], defaultValue: 'icon' },
     title: { type: 'text', defaultValue: 'No Projects Yet' },
     description: {
       type: 'text',
@@ -21,11 +23,11 @@ export default definePlayground({
     border: { type: 'boolean', defaultValue: true },
   },
 
-  render: ({ media, title, description, actions, border }) => (
+  render: ({ media, mediaVariant, title, description, actions, border }) => (
     <Empty className={border ? 'border' : undefined}>
       <EmptyHeader>
-        {media !== 'none' && (
-          <EmptyMedia variant={media}>
+        {media && (
+          <EmptyMedia variant={mediaVariant}>
             <FolderCodeIcon />
           </EmptyMedia>
         )}
@@ -35,8 +37,10 @@ export default definePlayground({
       {actions && (
         <EmptyContent>
           <div className="flex gap-2">
-            <Button>Create Project</Button>
-            <Button variant="outline">Import Project</Button>
+            <Button onClick={() => {}}>Create Project</Button>
+            <Button variant="outline" onClick={() => {}}>
+              Import Project
+            </Button>
           </div>
         </EmptyContent>
       )}
@@ -50,14 +54,14 @@ export default definePlayground({
     </Empty>
   ),
 
-  code: ({ media, title, description, actions, border }) => {
-    const icons = [...(actions ? ['ArrowUpRightIcon'] : []), ...(media !== 'none' ? ['FolderCodeIcon'] : [])];
+  code: ({ media, mediaVariant, title, description, actions, border }) => {
+    const icons = [...(actions ? ['ArrowUpRightIcon'] : []), ...(media ? ['FolderCodeIcon'] : [])];
     const components = [
       'Empty',
       ...(actions ? ['EmptyContent'] : []),
       'EmptyDescription',
       'EmptyHeader',
-      ...(media !== 'none' ? ['EmptyMedia'] : []),
+      ...(media ? ['EmptyMedia'] : []),
       'EmptyTitle',
     ];
 
@@ -68,9 +72,10 @@ export default definePlayground({
       '',
       `<Empty${border ? ' className="border"' : ''}>`,
       '  <EmptyHeader>',
-      ...(media !== 'none'
+      /* EmptyMedia의 variant 기본값은 default */
+      ...(media
         ? [
-            `    <EmptyMedia${media === 'default' ? '' : ` variant="${media}"`}>`,
+            `    <EmptyMedia${mediaVariant === 'default' ? '' : ` variant="${mediaVariant}"`}>`,
             '      <FolderCodeIcon />',
             '    </EmptyMedia>',
           ]
@@ -82,8 +87,8 @@ export default definePlayground({
         ? [
             '  <EmptyContent>',
             '    <div className="flex gap-2">',
-            '      <Button>Create Project</Button>',
-            '      <Button variant="outline">Import Project</Button>',
+            '      <Button onClick={() => {}}>Create Project</Button>',
+            '      <Button variant="outline" onClick={() => {}}>Import Project</Button>',
             '    </div>',
             '  </EmptyContent>',
             '  <Button variant="link" asChild className="text-muted-foreground" size="sm">',

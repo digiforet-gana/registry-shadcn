@@ -19,6 +19,7 @@ const ITEMS = [
   { label: 'Billing', shortcut: '⌘B' },
   { label: 'Settings', shortcut: '⌘S' },
 ];
+const SUB_ITEMS = ['Email', 'Message'];
 
 /* 사이트 플레이그라운드 전용 파일 (registry.json에 등록하지 않으므로 배포되지 않음) */
 export default definePlayground({
@@ -29,20 +30,22 @@ export default definePlayground({
     side: { type: 'select', options: ['top', 'right', 'bottom', 'left'], defaultValue: 'bottom' },
     /* side 방향에 수직인 축 기준 정렬 (Popover와 달리 기본값이 start) */
     align: { type: 'select', options: ['start', 'center', 'end'], defaultValue: 'start' },
+    /* 항목 / 하위 메뉴 트리거 / 라벨의 왼쪽 들여쓰기 (inset prop) */
+    inset: { type: 'boolean', defaultValue: false },
     /* 항목 오른쪽 단축키 표시 */
     shortcut: { type: 'boolean', defaultValue: true },
   },
 
-  render: ({ side, align, shortcut }) => (
+  render: ({ side, align, inset, shortcut }) => (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline">Open Menu</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent side={side} align={align} className="w-48">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel inset={inset}>My Account</DropdownMenuLabel>
         <DropdownMenuGroup>
           {ITEMS.map((item) => (
-            <DropdownMenuItem key={item.label}>
+            <DropdownMenuItem key={item.label} inset={inset} onSelect={() => {}}>
               {item.label}
               {shortcut && <DropdownMenuShortcut>{item.shortcut}</DropdownMenuShortcut>}
             </DropdownMenuItem>
@@ -50,23 +53,29 @@ export default definePlayground({
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger>Invite Users</DropdownMenuSubTrigger>
+          <DropdownMenuSubTrigger inset={inset}>Invite Users</DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
-            <DropdownMenuItem>Email</DropdownMenuItem>
-            <DropdownMenuItem>Message</DropdownMenuItem>
+            {SUB_ITEMS.map((item) => (
+              <DropdownMenuItem key={item} onSelect={() => {}}>
+                {item}
+              </DropdownMenuItem>
+            ))}
           </DropdownMenuSubContent>
         </DropdownMenuSub>
         <DropdownMenuSeparator />
-        <DropdownMenuItem variant="destructive">Log Out</DropdownMenuItem>
+        <DropdownMenuItem variant="destructive" inset={inset} onSelect={() => {}}>
+          Log Out
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   ),
 
   code: ({ shortcut }, formatProps) => {
+    const insetProp = formatProps(['inset']);
     const items = ITEMS.map((item) =>
       shortcut
-        ? `      <DropdownMenuItem>\n        ${item.label}\n        <DropdownMenuShortcut>${item.shortcut}</DropdownMenuShortcut>\n      </DropdownMenuItem>`
-        : `      <DropdownMenuItem>${item.label}</DropdownMenuItem>`,
+        ? `      <DropdownMenuItem${insetProp} onSelect={() => {}}>\n        ${item.label}\n        <DropdownMenuShortcut>${item.shortcut}</DropdownMenuShortcut>\n      </DropdownMenuItem>`
+        : `      <DropdownMenuItem${insetProp} onSelect={() => {}}>${item.label}</DropdownMenuItem>`,
     );
 
     return [
@@ -90,20 +99,21 @@ export default definePlayground({
       '    <Button variant="outline">Open Menu</Button>',
       '  </DropdownMenuTrigger>',
       `  <DropdownMenuContent${formatProps(['side', 'align'])} className="w-48">`,
-      '    <DropdownMenuLabel>My Account</DropdownMenuLabel>',
+      `    <DropdownMenuLabel${insetProp}>My Account</DropdownMenuLabel>`,
       '    <DropdownMenuGroup>',
       ...items,
       '    </DropdownMenuGroup>',
       '    <DropdownMenuSeparator />',
       '    <DropdownMenuSub>',
-      '      <DropdownMenuSubTrigger>Invite Users</DropdownMenuSubTrigger>',
+      `      <DropdownMenuSubTrigger${insetProp}>Invite Users</DropdownMenuSubTrigger>`,
       '      <DropdownMenuSubContent>',
-      '        <DropdownMenuItem>Email</DropdownMenuItem>',
-      '        <DropdownMenuItem>Message</DropdownMenuItem>',
+      ...SUB_ITEMS.map((item) => `        <DropdownMenuItem onSelect={() => {}}>${item}</DropdownMenuItem>`),
       '      </DropdownMenuSubContent>',
       '    </DropdownMenuSub>',
       '    <DropdownMenuSeparator />',
-      '    <DropdownMenuItem variant="destructive">Log Out</DropdownMenuItem>',
+      `    <DropdownMenuItem variant="destructive"${insetProp} onSelect={() => {}}>`,
+      '      Log Out',
+      '    </DropdownMenuItem>',
       '  </DropdownMenuContent>',
       '</DropdownMenu>',
     ].join('\n');

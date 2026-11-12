@@ -1,4 +1,4 @@
-import { type MouseEvent, useState } from 'react';
+import type { MouseEvent } from 'react';
 import { definePlayground } from '@/lib/playground';
 import {
   Pagination,
@@ -9,6 +9,9 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from './pagination';
+
+/* 공식 예제처럼 2페이지가 선택된 상태로 표시 */
+const CURRENT_PAGE = 2;
 
 /*
  * 표시할 페이지 목록
@@ -24,56 +27,8 @@ const getPages = (current: number, total: number, ellipsis: boolean): (number | 
   return sorted.flatMap((page, index) => (index > 0 && page - sorted[index - 1] > 1 ? ['ellipsis', page] : [page]));
 };
 
-type PreviewProps = { totalPages: number; ellipsis: boolean; previousText: string; nextText: string };
-
-/* 현재 페이지 상태를 관리하기 위한 미리보기 컴포넌트 */
-const PaginationPreview = ({ totalPages, ellipsis, previousText, nextText }: PreviewProps) => {
-  const [current, setCurrent] = useState(1);
-
-  /* 데모에서는 링크 이동 대신 현재 페이지만 변경 */
-  const goTo = (page: number) => (event: MouseEvent) => {
-    event.preventDefault();
-    setCurrent(Math.min(totalPages, Math.max(1, page)));
-  };
-
-  return (
-    <Pagination>
-      <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious
-            href="#"
-            text={previousText}
-            onClick={goTo(current - 1)}
-            aria-disabled={current === 1}
-            className={current === 1 ? 'pointer-events-none opacity-50' : undefined}
-          />
-        </PaginationItem>
-        {getPages(current, totalPages, ellipsis).map((page, index) =>
-          page === 'ellipsis' ? (
-            <PaginationItem key={`ellipsis-${index}`}>
-              <PaginationEllipsis />
-            </PaginationItem>
-          ) : (
-            <PaginationItem key={page}>
-              <PaginationLink href="#" isActive={page === current} onClick={goTo(page)}>
-                {page}
-              </PaginationLink>
-            </PaginationItem>
-          ),
-        )}
-        <PaginationItem>
-          <PaginationNext
-            href="#"
-            text={nextText}
-            onClick={goTo(current + 1)}
-            aria-disabled={current === totalPages}
-            className={current === totalPages ? 'pointer-events-none opacity-50' : undefined}
-          />
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
-  );
-};
+/* 데모에서는 링크 이동 방지 */
+const preventNavigation = (event: MouseEvent) => event.preventDefault();
 
 /* 사이트 플레이그라운드 전용 파일 (registry.json에 등록하지 않으므로 배포되지 않음) */
 export default definePlayground({
@@ -90,25 +45,52 @@ export default definePlayground({
   },
 
   render: ({ totalPages, ellipsis, previousText, nextText }) => (
-    <PaginationPreview
-      key={totalPages}
-      totalPages={Number(totalPages)}
-      ellipsis={ellipsis}
-      previousText={previousText}
-      nextText={nextText}
-    />
+    <Pagination>
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationPrevious href="#" text={previousText} onClick={preventNavigation} />
+        </PaginationItem>
+        {getPages(CURRENT_PAGE, Number(totalPages), ellipsis).map((page, index) =>
+          page === 'ellipsis' ? (
+            <PaginationItem key={`ellipsis-${index}`}>
+              <PaginationEllipsis />
+            </PaginationItem>
+          ) : (
+            <PaginationItem key={page}>
+              {/* isActive: 현재 페이지 표시 */}
+              <PaginationLink href="#" isActive={page === CURRENT_PAGE} onClick={preventNavigation}>
+                {page}
+              </PaginationLink>
+            </PaginationItem>
+          ),
+        )}
+        <PaginationItem>
+          <PaginationNext href="#" text={nextText} onClick={preventNavigation} />
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
   ),
 
-  /* 공식 예제처럼 2페이지가 선택된 정적 구조로 표시 */
-  code: ({ ellipsis, previousText, nextText }) => {
+  code: ({ totalPages, ellipsis, previousText, nextText }) => {
     const previousAttr = previousText === 'Previous' ? '' : ` text="${previousText}"`;
     const nextAttr = nextText === 'Next' ? '' : ` text="${nextText}"`;
+    const pages = getPages(CURRENT_PAGE, Number(totalPages), ellipsis);
+    const items = pages.flatMap((page) => {
+      if (page === 'ellipsis') return ['    <PaginationItem>', '      <PaginationEllipsis />', '    </PaginationItem>'];
+
+      const activeAttr = page === CURRENT_PAGE ? ' isActive' : '';
+      return [
+        '    <PaginationItem>',
+        `      <PaginationLink href="#"${activeAttr}>${page}</PaginationLink>`,
+        '    </PaginationItem>',
+      ];
+    });
 
     return [
       'import {',
       '  Pagination,',
       '  PaginationContent,',
-      ...(ellipsis ? ['  PaginationEllipsis,'] : []),
+      ...(pages.includes('ellipsis') ? ['  PaginationEllipsis,'] : []),
       '  PaginationItem,',
       '  PaginationLink,',
       '  PaginationNext,',
@@ -120,18 +102,7 @@ export default definePlayground({
       '    <PaginationItem>',
       `      <PaginationPrevious href="#"${previousAttr} />`,
       '    </PaginationItem>',
-      '    <PaginationItem>',
-      '      <PaginationLink href="#">1</PaginationLink>',
-      '    </PaginationItem>',
-      '    <PaginationItem>',
-      '      <PaginationLink href="#" isActive>',
-      '        2',
-      '      </PaginationLink>',
-      '    </PaginationItem>',
-      '    <PaginationItem>',
-      '      <PaginationLink href="#">3</PaginationLink>',
-      '    </PaginationItem>',
-      ...(ellipsis ? ['    <PaginationItem>', '      <PaginationEllipsis />', '    </PaginationItem>'] : []),
+      ...items,
       '    <PaginationItem>',
       `      <PaginationNext href="#"${nextAttr} />`,
       '    </PaginationItem>',

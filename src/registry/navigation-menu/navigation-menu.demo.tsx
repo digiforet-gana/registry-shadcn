@@ -48,9 +48,13 @@ export default definePlayground({
      * false: 하위 메뉴가 각 트리거 바로 아래에 따로 열림
      */
     viewport: { type: 'boolean', defaultValue: true },
+    /* Docs 링크(NavigationMenuLink)를 현재 페이지로 표시 */
+    active: { type: 'boolean', defaultValue: false },
+    /* Components 트리거(NavigationMenuTrigger) 비활성화 */
+    disabled: { type: 'boolean', defaultValue: false },
   },
 
-  render: ({ viewport }) => (
+  render: ({ viewport, active, disabled }) => (
     <div className="flex h-80 items-start justify-center">
       <NavigationMenu key={String(viewport)} viewport={viewport}>
         <NavigationMenuList>
@@ -65,7 +69,7 @@ export default definePlayground({
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+            <NavigationMenuTrigger disabled={disabled}>Components</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid w-96 gap-1 md:w-lg md:grid-cols-2">
                 {COMPONENTS.map((item) => (
@@ -75,7 +79,7 @@ export default definePlayground({
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+            <NavigationMenuLink asChild active={active} className={navigationMenuTriggerStyle()}>
               <a href="#" onClick={preventNavigation}>
                 Docs
               </a>
@@ -86,7 +90,7 @@ export default definePlayground({
     </div>
   ),
 
-  code: (_, formatProps) =>
+  code: ({ active, disabled }, formatProps) =>
     [
       'import {',
       '  NavigationMenu,',
@@ -117,8 +121,15 @@ export default definePlayground({
       '        </ul>',
       '      </NavigationMenuContent>',
       '    </NavigationMenuItem>',
+      ...(disabled
+        ? [
+            '    <NavigationMenuItem>',
+            '      <NavigationMenuTrigger disabled>Components</NavigationMenuTrigger>',
+            '    </NavigationMenuItem>',
+          ]
+        : []),
       '    <NavigationMenuItem>',
-      '      <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>',
+      `      <NavigationMenuLink asChild${active ? ' active' : ''} className={navigationMenuTriggerStyle()}>`,
       '        <a href="/docs">Docs</a>',
       '      </NavigationMenuLink>',
       '    </NavigationMenuItem>',

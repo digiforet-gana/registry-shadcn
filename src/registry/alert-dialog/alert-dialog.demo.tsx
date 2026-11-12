@@ -28,11 +28,9 @@ export default definePlayground({
     },
     /* 제목 옆 아이콘 영역 (AlertDialogMedia) */
     media: { type: 'boolean', defaultValue: true },
-    /* 확인 버튼을 위험 동작 스타일로 표시 */
-    destructive: { type: 'boolean', defaultValue: true },
   },
 
-  render: ({ size, title, description, media, destructive }) => (
+  render: ({ size, title, description, media }) => (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button variant="outline">Delete Project</Button>
@@ -49,13 +47,13 @@ export default definePlayground({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction variant={destructive ? 'destructive' : 'default'}>Delete</AlertDialogAction>
+          <AlertDialogAction>Delete</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
   ),
 
-  code: ({ title, description, media, destructive }, formatProps) =>
+  code: ({ title, description, media }, formatProps) =>
     [
       ...(media ? [`import { Trash2Icon } from 'lucide-react';`] : []),
       `import {`,
@@ -84,7 +82,7 @@ export default definePlayground({
       '    </AlertDialogHeader>',
       '    <AlertDialogFooter>',
       '      <AlertDialogCancel>Cancel</AlertDialogCancel>',
-      `      <AlertDialogAction${destructive ? ' variant="destructive"' : ''}>Delete</AlertDialogAction>`,
+      '      <AlertDialogAction>Delete</AlertDialogAction>',
       '    </AlertDialogFooter>',
       '  </AlertDialogContent>',
       '</AlertDialog>',

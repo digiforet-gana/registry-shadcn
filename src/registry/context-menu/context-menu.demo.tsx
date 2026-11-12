@@ -24,10 +24,10 @@ const ITEMS = [
 const SUB_ITEMS = ['Save Page...', 'Create Shortcut...', 'Name Window...'];
 const PEOPLE = ['Pedro Duarte', 'Colm Tuite'];
 
-type Sections = { shortcut: boolean; submenu: boolean; checkbox: boolean; radio: boolean };
+type Sections = { inset: boolean; shortcut: boolean; submenu: boolean; checkbox: boolean; radio: boolean };
 
 /* 체크 / 라디오 항목의 선택 상태를 관리하기 위한 미리보기 컴포넌트 */
-const ContextMenuPreview = ({ shortcut, submenu, checkbox, radio }: Sections) => {
+const ContextMenuPreview = ({ inset, shortcut, submenu, checkbox, radio }: Sections) => {
   const [showBookmarks, setShowBookmarks] = useState(true);
   const [showFullUrls, setShowFullUrls] = useState(false);
   const [person, setPerson] = useState(PEOPLE[0]);
@@ -39,20 +39,24 @@ const ContextMenuPreview = ({ shortcut, submenu, checkbox, radio }: Sections) =>
       </ContextMenuTrigger>
       <ContextMenuContent className="w-52">
         {ITEMS.map((item) => (
-          <ContextMenuItem key={item.label} inset disabled={item.disabled}>
+          <ContextMenuItem key={item.label} inset={inset} disabled={item.disabled} onSelect={() => {}}>
             {item.label}
             {shortcut && <ContextMenuShortcut>{item.shortcut}</ContextMenuShortcut>}
           </ContextMenuItem>
         ))}
         {submenu && (
           <ContextMenuSub>
-            <ContextMenuSubTrigger inset>More Tools</ContextMenuSubTrigger>
+            <ContextMenuSubTrigger inset={inset}>More Tools</ContextMenuSubTrigger>
             <ContextMenuSubContent className="w-44">
               {SUB_ITEMS.map((item) => (
-                <ContextMenuItem key={item}>{item}</ContextMenuItem>
+                <ContextMenuItem key={item} onSelect={() => {}}>
+                  {item}
+                </ContextMenuItem>
               ))}
               <ContextMenuSeparator />
-              <ContextMenuItem variant="destructive">Delete</ContextMenuItem>
+              <ContextMenuItem variant="destructive" onSelect={() => {}}>
+                Delete
+              </ContextMenuItem>
             </ContextMenuSubContent>
           </ContextMenuSub>
         )}
@@ -71,7 +75,7 @@ const ContextMenuPreview = ({ shortcut, submenu, checkbox, radio }: Sections) =>
           <>
             <ContextMenuSeparator />
             <ContextMenuRadioGroup value={person} onValueChange={setPerson}>
-              <ContextMenuLabel inset>People</ContextMenuLabel>
+              <ContextMenuLabel inset={inset}>People</ContextMenuLabel>
               {PEOPLE.map((name) => (
                 <ContextMenuRadioItem key={name} value={name}>
                   {name}
@@ -90,6 +94,8 @@ export default definePlayground({
   component: 'ContextMenu',
   importPath: '@/components/ui/context-menu',
   controls: {
+    /* 항목 / 하위 메뉴 트리거 / 라벨의 왼쪽 들여쓰기 (inset prop) */
+    inset: { type: 'boolean', defaultValue: true },
     /* 항목 우측 단축키 표시 (ContextMenuShortcut) */
     shortcut: { type: 'boolean', defaultValue: true },
     /* 하위 메뉴 (ContextMenuSub) */
@@ -102,7 +108,8 @@ export default definePlayground({
 
   render: (sections) => <ContextMenuPreview {...sections} />,
 
-  code: ({ shortcut, submenu, checkbox, radio }) => {
+  code: ({ inset, shortcut, submenu, checkbox, radio }) => {
+    const insetProp = inset ? ' inset' : '';
     const components = [
       'ContextMenu',
       ...(checkbox ? ['ContextMenuCheckboxItem'] : []),
@@ -114,16 +121,18 @@ export default definePlayground({
       ...(submenu ? ['ContextMenuSub', 'ContextMenuSubContent', 'ContextMenuSubTrigger'] : []),
       'ContextMenuTrigger',
     ];
-    const items = ITEMS.flatMap((item) =>
-      shortcut
+    const items = ITEMS.flatMap((item) => {
+      const props = `${insetProp}${item.disabled ? ' disabled' : ''} onSelect={() => {}}`;
+
+      return shortcut
         ? [
-            `    <ContextMenuItem inset${item.disabled ? ' disabled' : ''}>`,
+            `    <ContextMenuItem${props}>`,
             `      ${item.label}`,
             `      <ContextMenuShortcut>${item.shortcut}</ContextMenuShortcut>`,
             '    </ContextMenuItem>',
           ]
-        : [`    <ContextMenuItem inset${item.disabled ? ' disabled' : ''}>${item.label}</ContextMenuItem>`],
-    );
+        : [`    <ContextMenuItem${props}>${item.label}</ContextMenuItem>`];
+    });
 
     return [
       `import {`,
@@ -139,11 +148,11 @@ export default definePlayground({
       ...(submenu
         ? [
             '    <ContextMenuSub>',
-            '      <ContextMenuSubTrigger inset>More Tools</ContextMenuSubTrigger>',
+            `      <ContextMenuSubTrigger${insetProp}>More Tools</ContextMenuSubTrigger>`,
             '      <ContextMenuSubContent className="w-44">',
-            ...SUB_ITEMS.map((item) => `        <ContextMenuItem>${item}</ContextMenuItem>`),
+            ...SUB_ITEMS.map((item) => `        <ContextMenuItem onSelect={() => {}}>${item}</ContextMenuItem>`),
             '        <ContextMenuSeparator />',
-            '        <ContextMenuItem variant="destructive">Delete</ContextMenuItem>',
+            '        <ContextMenuItem variant="destructive" onSelect={() => {}}>Delete</ContextMenuItem>',
             '      </ContextMenuSubContent>',
             '    </ContextMenuSub>',
           ]
@@ -159,7 +168,7 @@ export default definePlayground({
         ? [
             '    <ContextMenuSeparator />',
             `    <ContextMenuRadioGroup value="${PEOPLE[0]}">`,
-            '      <ContextMenuLabel inset>People</ContextMenuLabel>',
+            `      <ContextMenuLabel${insetProp}>People</ContextMenuLabel>`,
             ...PEOPLE.map((name) => `      <ContextMenuRadioItem value="${name}">${name}</ContextMenuRadioItem>`),
             '    </ContextMenuRadioGroup>',
           ]

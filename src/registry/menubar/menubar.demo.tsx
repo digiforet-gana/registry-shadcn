@@ -18,8 +18,17 @@ import {
 
 const PROFILES = ['Andy', 'Benoit', 'Luis'];
 
+type Side = 'top' | 'right' | 'bottom' | 'left';
+type Align = 'start' | 'center' | 'end';
+
+interface MenubarPreviewProps {
+  shortcut: boolean;
+  side: Side;
+  align: Align;
+}
+
 /* 체크 / 라디오 항목의 선택 상태를 관리하기 위한 미리보기 컴포넌트 */
-const MenubarPreview = ({ shortcut }: { shortcut: boolean }) => {
+const MenubarPreview = ({ shortcut, side, align }: MenubarPreviewProps) => {
   const [showBookmarks, setShowBookmarks] = useState(false);
   const [showFullUrls, setShowFullUrls] = useState(true);
   const [profile, setProfile] = useState('Benoit');
@@ -30,37 +39,41 @@ const MenubarPreview = ({ shortcut }: { shortcut: boolean }) => {
     <Menubar>
       <MenubarMenu>
         <MenubarTrigger>File</MenubarTrigger>
-        <MenubarContent>
-          <MenubarItem>New Tab {keys('⌘T')}</MenubarItem>
-          <MenubarItem>New Window {keys('⌘N')}</MenubarItem>
+        <MenubarContent side={side} align={align}>
+          <MenubarItem onSelect={() => {}}>New Tab {keys('⌘T')}</MenubarItem>
+          <MenubarItem onSelect={() => {}}>New Window {keys('⌘N')}</MenubarItem>
           <MenubarItem disabled>New Incognito Window</MenubarItem>
           <MenubarSeparator />
           <MenubarSub>
             <MenubarSubTrigger>Share</MenubarSubTrigger>
             <MenubarSubContent>
-              <MenubarItem>Email link</MenubarItem>
-              <MenubarItem>Messages</MenubarItem>
-              <MenubarItem>Notes</MenubarItem>
+              <MenubarItem onSelect={() => {}}>Email link</MenubarItem>
+              <MenubarItem onSelect={() => {}}>Messages</MenubarItem>
+              <MenubarItem onSelect={() => {}}>Notes</MenubarItem>
             </MenubarSubContent>
           </MenubarSub>
           <MenubarSeparator />
-          <MenubarItem>Print... {keys('⌘P')}</MenubarItem>
+          <MenubarItem onSelect={() => {}}>Print... {keys('⌘P')}</MenubarItem>
+          <MenubarSeparator />
+          <MenubarItem variant="destructive" onSelect={() => {}}>
+            Close Window {keys('⇧⌘W')}
+          </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
         <MenubarTrigger>Edit</MenubarTrigger>
-        <MenubarContent>
-          <MenubarItem>Undo {keys('⌘Z')}</MenubarItem>
-          <MenubarItem>Redo {keys('⇧⌘Z')}</MenubarItem>
+        <MenubarContent side={side} align={align}>
+          <MenubarItem onSelect={() => {}}>Undo {keys('⌘Z')}</MenubarItem>
+          <MenubarItem onSelect={() => {}}>Redo {keys('⇧⌘Z')}</MenubarItem>
           <MenubarSeparator />
-          <MenubarItem>Cut</MenubarItem>
-          <MenubarItem>Copy</MenubarItem>
-          <MenubarItem>Paste</MenubarItem>
+          <MenubarItem onSelect={() => {}}>Cut</MenubarItem>
+          <MenubarItem onSelect={() => {}}>Copy</MenubarItem>
+          <MenubarItem onSelect={() => {}}>Paste</MenubarItem>
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
         <MenubarTrigger>View</MenubarTrigger>
-        <MenubarContent>
+        <MenubarContent side={side} align={align}>
           <MenubarCheckboxItem checked={showBookmarks} onCheckedChange={setShowBookmarks}>
             Always Show Bookmarks Bar
           </MenubarCheckboxItem>
@@ -68,7 +81,9 @@ const MenubarPreview = ({ shortcut }: { shortcut: boolean }) => {
             Always Show Full URLs
           </MenubarCheckboxItem>
           <MenubarSeparator />
-          <MenubarItem inset>Reload {keys('⌘R')}</MenubarItem>
+          <MenubarItem inset onSelect={() => {}}>
+            Reload {keys('⌘R')}
+          </MenubarItem>
           <MenubarItem inset disabled>
             Force Reload {keys('⇧⌘R')}
           </MenubarItem>
@@ -76,7 +91,7 @@ const MenubarPreview = ({ shortcut }: { shortcut: boolean }) => {
       </MenubarMenu>
       <MenubarMenu>
         <MenubarTrigger>Profiles</MenubarTrigger>
-        <MenubarContent>
+        <MenubarContent side={side} align={align}>
           <MenubarRadioGroup value={profile} onValueChange={setProfile}>
             {PROFILES.map((name) => (
               <MenubarRadioItem key={name} value={name}>
@@ -85,8 +100,12 @@ const MenubarPreview = ({ shortcut }: { shortcut: boolean }) => {
             ))}
           </MenubarRadioGroup>
           <MenubarSeparator />
-          <MenubarItem inset>Edit...</MenubarItem>
-          <MenubarItem inset>Add Profile...</MenubarItem>
+          <MenubarItem inset onSelect={() => {}}>
+            Edit...
+          </MenubarItem>
+          <MenubarItem inset onSelect={() => {}}>
+            Add Profile...
+          </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
     </Menubar>
@@ -100,20 +119,25 @@ export default definePlayground({
   controls: {
     /* 항목 우측 단축키 표시 (MenubarShortcut) */
     shortcut: { type: 'boolean', defaultValue: true },
+    /* 메뉴가 나타나는 방향 / 정렬 (MenubarContent) */
+    side: { type: 'select', options: ['top', 'right', 'bottom', 'left'], defaultValue: 'bottom' },
+    align: { type: 'select', options: ['start', 'center', 'end'], defaultValue: 'start' },
   },
 
-  render: ({ shortcut }) => <MenubarPreview shortcut={shortcut} />,
+  render: ({ shortcut, side, align }) => <MenubarPreview shortcut={shortcut} side={side} align={align} />,
 
   /* 구조 확인용으로 File / View 메뉴만 표시 */
-  code: ({ shortcut }) => {
+  code: ({ shortcut }, formatProps) => {
+    const contentAttrs = formatProps(['side', 'align']);
+    /* 일반 항목은 onSelect로 선택 동작을 연결 */
     const item = (label: string, keys: string, attrs = '') =>
       shortcut
         ? [
-            `      <MenubarItem${attrs}>`,
+            `      <MenubarItem${attrs} onSelect={() => {}}>`,
             `        ${label} <MenubarShortcut>${keys}</MenubarShortcut>`,
             '      </MenubarItem>',
           ]
-        : [`      <MenubarItem${attrs}>${label}</MenubarItem>`];
+        : [`      <MenubarItem${attrs} onSelect={() => {}}>${label}</MenubarItem>`];
 
     return [
       'import {',
@@ -133,22 +157,24 @@ export default definePlayground({
       '<Menubar>',
       '  <MenubarMenu>',
       '    <MenubarTrigger>File</MenubarTrigger>',
-      '    <MenubarContent>',
+      `    <MenubarContent${contentAttrs}>`,
       ...item('New Tab', '⌘T'),
       '      <MenubarItem disabled>New Incognito Window</MenubarItem>',
       '      <MenubarSeparator />',
       '      <MenubarSub>',
       '        <MenubarSubTrigger>Share</MenubarSubTrigger>',
       '        <MenubarSubContent>',
-      '          <MenubarItem>Email link</MenubarItem>',
-      '          <MenubarItem>Messages</MenubarItem>',
+      '          <MenubarItem onSelect={() => {}}>Email link</MenubarItem>',
+      '          <MenubarItem onSelect={() => {}}>Messages</MenubarItem>',
       '        </MenubarSubContent>',
       '      </MenubarSub>',
+      '      <MenubarSeparator />',
+      ...item('Close Window', '⇧⌘W', ' variant="destructive"'),
       '    </MenubarContent>',
       '  </MenubarMenu>',
       '  <MenubarMenu>',
       '    <MenubarTrigger>View</MenubarTrigger>',
-      '    <MenubarContent>',
+      `    <MenubarContent${contentAttrs}>`,
       '      <MenubarCheckboxItem checked>Always Show Full URLs</MenubarCheckboxItem>',
       '      <MenubarSeparator />',
       ...item('Reload', '⌘R', ' inset'),

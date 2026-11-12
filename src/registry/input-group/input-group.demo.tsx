@@ -1,4 +1,4 @@
-import { CopyIcon, SearchIcon } from 'lucide-react';
+import { SearchIcon } from 'lucide-react';
 import { definePlayground } from '@/lib/playground';
 import {
   InputGroup,
@@ -19,7 +19,7 @@ export default definePlayground({
     /* 앞쪽 요소 (InputGroupAddon align="inline-start" / "block-start") */
     start: { type: 'select', options: ['none', 'icon', 'text'], defaultValue: 'icon' },
     /* 뒤쪽 요소 (InputGroupAddon align="inline-end" / "block-end") */
-    end: { type: 'select', options: ['none', 'text', 'button', 'icon-button'], defaultValue: 'button' },
+    end: { type: 'select', options: ['none', 'text', 'button'], defaultValue: 'button' },
     placeholder: { type: 'text', defaultValue: 'Search...' },
     disabled: { type: 'boolean', defaultValue: false },
     /* 폼 검증 실패 등 오류 상태 표시 */
@@ -41,10 +41,9 @@ export default definePlayground({
         {end !== 'none' && (
           <InputGroupAddon align={isTextarea ? 'block-end' : 'inline-end'}>
             {end === 'text' && <InputGroupText>.com</InputGroupText>}
-            {end === 'button' && <InputGroupButton variant="secondary">Search</InputGroupButton>}
-            {end === 'icon-button' && (
-              <InputGroupButton size="icon-xs" aria-label="Copy">
-                <CopyIcon />
+            {end === 'button' && (
+              <InputGroupButton variant="secondary" onClick={() => {}}>
+                Search
               </InputGroupButton>
             )}
           </InputGroupAddon>
@@ -56,11 +55,11 @@ export default definePlayground({
   code: ({ control, start, end, placeholder, disabled, 'aria-invalid': ariaInvalid }) => {
     const isTextarea = control === 'textarea';
     const controlName = isTextarea ? 'InputGroupTextarea' : 'InputGroupInput';
-    const icons = [...(end === 'icon-button' ? ['CopyIcon'] : []), ...(start === 'icon' ? ['SearchIcon'] : [])];
+    const icons = start === 'icon' ? ['SearchIcon'] : [];
     const components = [
       'InputGroup',
       ...(start !== 'none' || end !== 'none' ? ['InputGroupAddon'] : []),
-      ...(end === 'button' || end === 'icon-button' ? ['InputGroupButton'] : []),
+      ...(end === 'button' ? ['InputGroupButton'] : []),
       ...(isTextarea ? [] : ['InputGroupInput']),
       ...(start === 'text' || end === 'text' ? ['InputGroupText'] : []),
       ...(isTextarea ? ['InputGroupTextarea'] : []),
@@ -68,11 +67,11 @@ export default definePlayground({
     const startContent = { none: [], icon: ['<SearchIcon />'], text: ['<InputGroupText>https://</InputGroupText>'] }[
       start
     ];
+    /* 클릭 이벤트 연결 위치를 보여주기 위해 onClick은 항상 표시 */
     const endContent = {
       none: [],
       text: ['<InputGroupText>.com</InputGroupText>'],
-      button: ['<InputGroupButton variant="secondary">Search</InputGroupButton>'],
-      'icon-button': ['<InputGroupButton size="icon-xs" aria-label="Copy">', '  <CopyIcon />', '</InputGroupButton>'],
+      button: ['<InputGroupButton variant="secondary" onClick={() => {}}>Search</InputGroupButton>'],
     }[end];
     const addon = (align: string, content: string[]) =>
       content.length > 0

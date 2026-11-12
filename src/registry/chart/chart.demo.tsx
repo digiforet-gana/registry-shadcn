@@ -35,13 +35,21 @@ export default definePlayground({
     type: { type: 'select', options: ['bar', 'line', 'area'], defaultValue: 'bar' },
     /* 마우스를 올리면 값 표시 (ChartTooltip) */
     tooltip: { type: 'boolean', defaultValue: true },
-    /* 아래쪽 범례 (ChartLegend) */
+    /* 툴팁 항목 앞 색상 표시 모양 (ChartTooltipContent의 indicator) */
+    indicator: { type: 'select', options: ['dot', 'line', 'dashed'], defaultValue: 'dot' },
+    /* 툴팁 상단 라벨(월) 숨김 (ChartTooltipContent의 hideLabel) */
+    hideLabel: { type: 'boolean', defaultValue: false },
+    /* 툴팁 항목 앞 색상 표시 숨김 (ChartTooltipContent의 hideIndicator) */
+    hideIndicator: { type: 'boolean', defaultValue: false },
+    /* 범례 (ChartLegend) */
     legend: { type: 'boolean', defaultValue: false },
+    /* 범례 위치 (ChartLegend의 verticalAlign, top이면 차트 위에 표시) */
+    legendAlign: { type: 'select', options: ['bottom', 'top'], defaultValue: 'bottom' },
     /* 가로 격자선 (CartesianGrid) */
     grid: { type: 'boolean', defaultValue: true },
   },
 
-  render: ({ type, tooltip, legend, grid }) => {
+  render: ({ type, tooltip, indicator, hideLabel, hideIndicator, legend, legendAlign, grid }) => {
     /* 차트 종류와 상관없이 공통으로 들어가는 축 / 격자 / 툴팁 / 범례 */
     const common = (
       <>
@@ -53,8 +61,12 @@ export default definePlayground({
           tickMargin={10}
           tickFormatter={(value: string) => value.slice(0, 3)}
         />
-        {tooltip && <ChartTooltip content={<ChartTooltipContent />} />}
-        {legend && <ChartLegend content={<ChartLegendContent />} />}
+        {tooltip && (
+          <ChartTooltip
+            content={<ChartTooltipContent indicator={indicator} hideLabel={hideLabel} hideIndicator={hideIndicator} />}
+          />
+        )}
+        {legend && <ChartLegend verticalAlign={legendAlign} content={<ChartLegendContent />} />}
       </>
     );
 
@@ -94,7 +106,7 @@ export default definePlayground({
     );
   },
 
-  code: ({ type, tooltip, legend, grid }) => {
+  code: ({ type, tooltip, legend, legendAlign, grid }, formatProps) => {
     const chartName = { bar: 'BarChart', line: 'LineChart', area: 'AreaChart' }[type];
     const seriesName = { bar: 'Bar', line: 'Line', area: 'Area' }[type];
     const series = KEYS.map(
@@ -136,8 +148,14 @@ export default definePlayground({
       '      tickMargin={10}',
       '      tickFormatter={(value) => value.slice(0, 3)}',
       '    />',
-      ...(tooltip ? ['    <ChartTooltip content={<ChartTooltipContent />} />'] : []),
-      ...(legend ? ['    <ChartLegend content={<ChartLegendContent />} />'] : []),
+      ...(tooltip
+        ? [
+            `    <ChartTooltip content={<ChartTooltipContent${formatProps(['indicator', 'hideLabel', 'hideIndicator'])} />} />`,
+          ]
+        : []),
+      ...(legend
+        ? [`    <ChartLegend${legendAlign === 'top' ? ' verticalAlign="top"' : ''} content={<ChartLegendContent />} />`]
+        : []),
       ...series,
       `  </${chartName}>`,
       '</ChartContainer>',

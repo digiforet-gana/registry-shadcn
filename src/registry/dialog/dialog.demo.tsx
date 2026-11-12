@@ -34,7 +34,7 @@ export default definePlayground({
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         <DialogFooter showCloseButton={showFooterCloseButton}>
-          <Button>Confirm</Button>
+          <Button onClick={() => {}}>Confirm</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -64,7 +64,7 @@ export default definePlayground({
       `      <DialogDescription>${description}</DialogDescription>`,
       '    </DialogHeader>',
       `    <DialogFooter${showFooterCloseButton ? ' showCloseButton' : ''}>`,
-      '      <Button>Confirm</Button>',
+      '      <Button onClick={() => {}}>Confirm</Button>',
       '    </DialogFooter>',
       '  </DialogContent>',
       '</Dialog>',

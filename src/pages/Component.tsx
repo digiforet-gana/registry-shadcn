@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import { PlaygroundControls } from '@/components/playground/PlaygroundControls';
 import { loadPlayground } from '@/lib/demos';
 import { type Playground, getDefaultValues, getUsageCode } from '@/lib/playground';
-import { type RegistryItem, getInstallCommand, getRegistryItem } from '@/lib/registry';
+import { type RegistryItem, getInstallCommand, getNamespaceInstallCommand, getRegistryItem } from '@/lib/registry';
 import NotFoundPage from './NotFound';
 
 const ComponentPage = () => {
@@ -60,7 +60,14 @@ const ComponentContent = ({ item, playground }: { item: RegistryItem; playground
       <section className="flex flex-col gap-4">
         <h2 className="text-xl font-semibold">Installation</h2>
         <pre className="overflow-x-auto rounded-lg bg-muted p-4 text-sm">
-          <code>{getInstallCommand(item.name)}</code>
+          <code>
+            <span className="text-muted-foreground"># URL</span>
+            {`\n${getInstallCommand(item.name)}\n\n`}
+            <span className="text-muted-foreground">
+              # Namespace (설치할 프로젝트의 components.json에 레지스트리 등록 필요)
+            </span>
+            {`\n${getNamespaceInstallCommand(item.name)}`}
+          </code>
         </pre>
       </section>
 

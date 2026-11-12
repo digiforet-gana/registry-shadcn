@@ -7,6 +7,8 @@ export default definePlayground({
   component: 'Checkbox',
   importPath: '@/components/ui/checkbox',
   controls: {
+    /* 처음부터 체크된 상태로 시작 (체크 + disabled / aria-invalid 조합 확인용) */
+    defaultChecked: { type: 'boolean', defaultValue: false },
     disabled: { type: 'boolean', defaultValue: false },
     /* 폼 검증 실패 등 오류 상태 표시 */
     'aria-invalid': { type: 'boolean', defaultValue: false },
@@ -15,13 +17,13 @@ export default definePlayground({
 
   render: ({ label, ...props }) => (
     <div className="flex items-center gap-2">
-      <Checkbox id="checkbox-demo" {...props} />
+      <Checkbox key={String(props.defaultChecked)} id="checkbox-demo" {...props} />
       <Label htmlFor="checkbox-demo">{label}</Label>
     </div>
   ),
 
   code: ({ label }, formatProps) => {
-    const props = formatProps(['disabled', 'aria-invalid']);
+    const props = formatProps(['defaultChecked', 'disabled', 'aria-invalid']);
 
     return [
       `import { Checkbox } from '@/components/ui/checkbox';`,

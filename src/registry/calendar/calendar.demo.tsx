@@ -14,10 +14,12 @@ type PreviewProps = {
   fixedWeeks: boolean;
   showWeekNumber: boolean;
   locale: keyof typeof LOCALES;
+  buttonVariant: 'ghost' | 'outline' | 'secondary' | 'default';
+  disableWeekends: boolean;
 };
 
 /* 선택 상태를 관리하기 위한 미리보기 컴포넌트 (mode마다 값 형태가 다름) */
-const CalendarPreview = ({ mode, ...props }: PreviewProps) => {
+const CalendarPreview = ({ mode, disableWeekends, ...props }: PreviewProps) => {
   const [single, setSingle] = useState<Date | undefined>(new Date());
   const [multiple, setMultiple] = useState<Date[] | undefined>([]);
   const [range, setRange] = useState<DateRange | undefined>();
@@ -25,6 +27,7 @@ const CalendarPreview = ({ mode, ...props }: PreviewProps) => {
   const common = {
     ...props,
     locale: LOCALES[props.locale],
+    disabled: disableWeekends ? { dayOfWeek: [0, 6] } : undefined,
     className: 'rounded-lg border',
   };
 
@@ -56,22 +59,17 @@ export default definePlayground({
     showWeekNumber: { type: 'boolean', defaultValue: false },
     /* 요일, 월 이름 등의 표시 언어 */
     locale: { type: 'select', options: ['en', 'ko'], defaultValue: 'en' },
+    /* 이전 / 다음 달 이동 버튼의 Button variant */
+    buttonVariant: { type: 'select', options: ['ghost', 'outline', 'secondary', 'default'], defaultValue: 'ghost' },
+    /* 선택할 수 없는 날짜 표시 (예: 주말을 disabled로 지정하면 흐리게 표시) */
+    disableWeekends: { type: 'boolean', defaultValue: false },
   },
 
-  render: ({ mode, captionLayout, numberOfMonths, showOutsideDays, fixedWeeks, showWeekNumber, locale }) => (
-    <CalendarPreview
-      key={mode}
-      mode={mode}
-      captionLayout={captionLayout}
-      numberOfMonths={Number(numberOfMonths)}
-      showOutsideDays={showOutsideDays}
-      fixedWeeks={fixedWeeks}
-      showWeekNumber={showWeekNumber}
-      locale={locale}
-    />
+  render: ({ mode, numberOfMonths, ...props }) => (
+    <CalendarPreview key={mode} mode={mode} numberOfMonths={Number(numberOfMonths)} {...props} />
   ),
 
-  code: ({ mode, numberOfMonths, locale }, formatProps) => {
+  code: ({ mode, numberOfMonths, locale, disableWeekends }, formatProps) => {
     const state = {
       single: 'const [date, setDate] = useState<Date | undefined>(new Date());',
       multiple: 'const [dates, setDates] = useState<Date[] | undefined>([]);',
@@ -96,12 +94,13 @@ export default definePlayground({
       `  selected={${value}}`,
       `  onSelect={${setter}}`,
       /* 기본값과 다른 prop만 한 줄씩 표시 */
-      ...(['captionLayout', 'showOutsideDays', 'fixedWeeks', 'showWeekNumber'] as const)
+      ...(['captionLayout', 'showOutsideDays', 'fixedWeeks', 'showWeekNumber', 'buttonVariant'] as const)
         .map((key) => formatProps([key]).trim())
         .filter(Boolean)
         .map((prop) => `  ${prop}`),
       ...(numberOfMonths === '1' ? [] : [`  numberOfMonths={${numberOfMonths}}`]),
       ...(locale === 'ko' ? ['  locale={ko}'] : []),
+      ...(disableWeekends ? ['  disabled={{ dayOfWeek: [0, 6] }}'] : []),
       '  className="rounded-lg border"',
       '/>',
     ].join('\n');

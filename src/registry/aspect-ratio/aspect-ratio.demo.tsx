@@ -17,15 +17,14 @@ export default definePlayground({
   controls: {
     /* 가로 : 세로 비율 (너비에 맞춰 높이가 자동으로 정해짐) */
     ratio: { type: 'select', options: ['16:9', '4:3', '1:1', '3:4', '9:16'], defaultValue: '16:9' },
-    /* 감싸는 영역의 너비 (비율은 유지한 채 크기만 바뀜) */
-    width: { type: 'select', options: ['w-48', 'w-64', 'w-80'], defaultValue: 'w-64' },
   },
 
-  render: ({ ratio, width }) => {
+  /* AspectRatio는 감싸는 영역의 너비를 기준으로 높이를 정함 */
+  render: ({ ratio }) => {
     const [x, y] = RATIOS[ratio];
 
     return (
-      <div className={width}>
+      <div className="w-64">
         <AspectRatio ratio={x / y} className="flex items-center justify-center rounded-lg bg-muted">
           <span className="text-sm font-medium text-muted-foreground">{ratio}</span>
         </AspectRatio>
@@ -33,13 +32,13 @@ export default definePlayground({
     );
   },
 
-  code: ({ ratio, width }) => {
+  code: ({ ratio }) => {
     const [x, y] = RATIOS[ratio];
 
     return [
       `import { AspectRatio } from '@/components/ui/aspect-ratio';`,
       '',
-      `<div className="${width}">`,
+      '<div className="w-64">',
       `  <AspectRatio ratio={${x} / ${y}} className="rounded-lg bg-muted">`,
       '    <img src="..." alt="Photo" className="size-full rounded-lg object-cover" />',
       '  </AspectRatio>',

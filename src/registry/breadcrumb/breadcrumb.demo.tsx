@@ -28,14 +28,14 @@ export default definePlayground({
   component: 'Breadcrumb',
   importPath: '@/components/ui/breadcrumb',
   controls: {
-    /* 구분 기호 (chevron: 기본 화살표, slash: 사선 아이콘으로 교체) */
-    separator: { type: 'select', options: ['chevron', 'slash'], defaultValue: 'chevron' },
+    /* 구분 기호를 children으로 직접 지정 (끄면 기본 화살표, 켜면 사선 아이콘 예시) */
+    customSeparator: { type: 'boolean', defaultValue: false },
     /* 중간 경로를 생략 기호로 줄이고, 누르면 드롭다운으로 표시 */
     ellipsis: { type: 'boolean', defaultValue: true },
   },
 
-  render: ({ separator, ellipsis }) => {
-    const sep = <BreadcrumbSeparator>{separator === 'slash' ? <SlashIcon /> : undefined}</BreadcrumbSeparator>;
+  render: ({ customSeparator, ellipsis }) => {
+    const sep = <BreadcrumbSeparator>{customSeparator ? <SlashIcon /> : undefined}</BreadcrumbSeparator>;
 
     return (
       <Breadcrumb>
@@ -55,7 +55,9 @@ export default definePlayground({
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="start">
                     {HIDDEN_ITEMS.map((item) => (
-                      <DropdownMenuItem key={item}>{item}</DropdownMenuItem>
+                      <DropdownMenuItem key={item} onSelect={() => {}}>
+                        {item}
+                      </DropdownMenuItem>
                     ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -77,9 +79,8 @@ export default definePlayground({
     );
   },
 
-  code: ({ separator, ellipsis }) => {
-    const isSlash = separator === 'slash';
-    const sep = isSlash
+  code: ({ customSeparator, ellipsis }) => {
+    const sep = customSeparator
       ? ['    <BreadcrumbSeparator>', '      <SlashIcon />', '    </BreadcrumbSeparator>']
       : ['    <BreadcrumbSeparator />'];
     const components = [
@@ -93,7 +94,7 @@ export default definePlayground({
     ];
 
     return [
-      ...(isSlash ? [`import { SlashIcon } from 'lucide-react';`] : []),
+      ...(customSeparator ? [`import { SlashIcon } from 'lucide-react';`] : []),
       `import {`,
       ...components.map((name) => `  ${name},`),
       `} from '@/components/ui/breadcrumb';`,
@@ -122,7 +123,7 @@ export default definePlayground({
             '          <BreadcrumbEllipsis />',
             '        </DropdownMenuTrigger>',
             '        <DropdownMenuContent align="start">',
-            ...HIDDEN_ITEMS.map((item) => `          <DropdownMenuItem>${item}</DropdownMenuItem>`),
+            ...HIDDEN_ITEMS.map((item) => `          <DropdownMenuItem onSelect={() => {}}>${item}</DropdownMenuItem>`),
             '        </DropdownMenuContent>',
             '      </DropdownMenu>',
             '    </BreadcrumbItem>',
